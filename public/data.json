@@ -1,0 +1,23 @@
+[
+    {
+       "id":"1",
+       "name":"Dan Jones",
+       "img":"https://i.ibb.co/hck51mY/team-img3-1.jpg",
+       "rating":"5",
+       "comments":"Great experience with The apartment Company and would highly recommend..."
+    },
+    {
+        "id":"2",
+        "name":"Ed Oweny",
+        "img":"https://i.ibb.co/FVg6Rgp/team-img1-1.jpg",
+        "rating":"4",
+        "comments":"The Apartment Company offer exceptional value. They are not the cheape..."
+    },
+    {
+        "id":"3",
+        "name":"Berk Atan",
+        "img":"https://i.ibb.co/6yrzBST/team-img4-1.jpg",
+        "rating":"5",
+        "comments":"Lovely! That was the word I said when I saw this apartment sales websi..."
+    }
+]

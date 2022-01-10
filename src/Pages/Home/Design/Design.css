@@ -1,0 +1,9 @@
+.item2{
+    margin-top: -80px;
+    transition: 0.6s;
+}
+.item1:hover{
+    background-color: tomato;
+}
+
+    

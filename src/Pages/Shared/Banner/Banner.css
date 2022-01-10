@@ -1,0 +1,9 @@
+.item{
+    width: 100%;
+    height: 300px;
+}
+.banner{
+    color: blue;
+    margin-left: 40px;
+    font-size: large;
+}
