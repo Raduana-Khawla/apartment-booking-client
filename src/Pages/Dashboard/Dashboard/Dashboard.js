@@ -14,7 +14,7 @@ import ManageProducts from "./ManageProducts/ManageProducts";
 const Dashbaord = () => {
   let { path, url } = useRouteMatch();
   const { user } = useAuth();
-  const [isAdmi, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Dashbaord = () => {
         }
       });
   }, [user?.email]);
-  console.log(isAdmi);
+  console.log(isAdmin);
   return (
     <div>
       <div className="dashboard-container">
@@ -59,7 +59,7 @@ const Dashbaord = () => {
               <Link to={`${url}/review`}>
                 <li className="dashboard-menu mt-5">Review</li>
               </Link>
-              {isAdmi && (
+              {isAdmin && (
                 <div className="admin-dashboard">
                   <li className="dashboard-menu mt-5">Orders list Admin</li>
 
