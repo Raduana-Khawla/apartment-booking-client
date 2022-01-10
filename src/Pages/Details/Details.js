@@ -47,7 +47,7 @@ const Details = () => {
                 <img className="w-100 h-50" src={service.imageURL} alt="" />
                 <h3>{service?.name}</h3>
                 <p>{service?.description}</p>
-                <h1>Price: {service?.price}</h1>
+                <h1>Price: ${service?.price}</h1>
               </div>
             </div>
             <div className="col-md-6 my-5">

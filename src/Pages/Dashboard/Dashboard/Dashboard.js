@@ -38,12 +38,12 @@ const Dashbaord = () => {
   console.log(isAdmi);
   return (
     <div>
-      <div className="dashboard-container ">
+      <div className="dashboard-container">
         <div className="row">
-          <div className="col-md-3 ">
+          <div className="col-md-3 py-5">
             <div className="dashboard">
               <h5>Dashboard</h5>
-              <li className="dashboard-menu mt-5">Orders list User</li>
+              <li className="dashboard-menu">Orders list User</li>
               <Link to={`${url}/BookProperty`}>
                 <li className="dashboard-menu mt-5">Book</li>
               </Link>
