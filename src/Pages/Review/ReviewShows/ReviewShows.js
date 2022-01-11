@@ -9,7 +9,7 @@ const ReviewShows = () => {
   const [reviews, setReviews] = useState([]);
   //loading data
   useEffect(() => {
-    fetch("https://afternoon-wave-99627.herokuapp.com//addReview")
+    fetch("https://afternoon-wave-99627.herokuapp.com/addReview")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

@@ -5,7 +5,7 @@ const ServicesSlice = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("https://afternoon-wave-99627.herokuapp.com//allServices")
+    fetch("https://afternoon-wave-99627.herokuapp.com/allServices")
       .then((res) => res.json())
       .then((data) => setServices(data.slice(0, 6)));
   }, []);

@@ -4,7 +4,7 @@ import "./ServiceItems.css";
 const ServiceItems = () => {
   const [serviceItems, setServiceItems] = useState([]);
   useEffect(() => {
-    fetch("https://afternoon-wave-99627.herokuapp.com//allServiceItems")
+    fetch("https://afternoon-wave-99627.herokuapp.com/allServiceItems")
       .then((res) => res.json())
       .then((data) => setServiceItems(data));
   }, []);

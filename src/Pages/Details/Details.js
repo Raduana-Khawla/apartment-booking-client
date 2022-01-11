@@ -17,7 +17,7 @@ const Details = () => {
   const onSubmit = (data) => {
     data.email = user?.email;
     data.status = "pending";
-    fetch("https://afternoon-wave-99627.herokuapp.com//addOrders", {
+    fetch("https://afternoon-wave-99627.herokuapp.com/addOrders", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
@@ -32,7 +32,7 @@ const Details = () => {
 
   useEffect(() => {
     fetch(
-      `https://afternoon-wave-99627.herokuapp.com//singleService/${serviceId}`
+      `https://afternoon-wave-99627.herokuapp.com/singleService/${serviceId}`
     )
       .then((res) => res.json())
       .then((data) => setService(data));

@@ -15,7 +15,7 @@ const ManageOrder = () => {
   };
   const handleUpdate = (id) => {
     fetch(
-      `https://afternoon-wave-99627.herokuapp.com//statusUpdate/${orderId}`,
+      `https://afternoon-wave-99627.herokuapp.com/statusUpdate/${orderId}`,
       {
         method: "PUT",
         headers: { "content-type": "application/json" },
@@ -29,7 +29,7 @@ const ManageOrder = () => {
       });
   };
   useEffect(() => {
-    fetch("https://afternoon-wave-99627.herokuapp.com//allOrders")
+    fetch("https://afternoon-wave-99627.herokuapp.com/allOrders")
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [control]);
@@ -43,7 +43,7 @@ const ManageOrder = () => {
   const onSubmit = (data) => {
     // console.log(data, orderId);
     fetch(
-      `https://afternoon-wave-99627.herokuapp.com//statusUpdate/${orderId}`,
+      `https://afternoon-wave-99627.herokuapp.com/statusUpdate/${orderId}`,
       {
         method: "PUT",
         headers: { "content-type": "application/json" },
@@ -58,7 +58,7 @@ const ManageOrder = () => {
   };
 
   const handleDelete = (id) => {
-    fetch(`https://afternoon-wave-99627.herokuapp.com//deleteOrder/${id}`, {
+    fetch(`https://afternoon-wave-99627.herokuapp.com/deleteOrder/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

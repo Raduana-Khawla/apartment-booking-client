@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ManageProducts = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("https://afternoon-wave-99627.herokuapp.com//allServices")
+    fetch("https://afternoon-wave-99627.herokuapp.com/allServices")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);

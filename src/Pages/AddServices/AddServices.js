@@ -11,7 +11,7 @@ const AddServices = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    fetch("https://afternoon-wave-99627.herokuapp.com//addServices", {
+    fetch("https://afternoon-wave-99627.herokuapp.com/addServices", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
