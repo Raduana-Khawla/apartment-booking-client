@@ -97,7 +97,7 @@ const useFirebase = () => {
   useEffect(() => {
     let isUnmount = false;
     setIsLoading(true);
-    fetch(`https://afternoon-wave-99627.herokuapp.com//users/${user.email}`)
+    fetch(`https://afternoon-wave-99627.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (!isUnmount) {
@@ -124,7 +124,7 @@ const useFirebase = () => {
 
   const saveUser = (email, displayName, username, method) => {
     const user = { email, displayName, username };
-    fetch("https://afternoon-wave-99627.herokuapp.com//users", {
+    fetch("https://afternoon-wave-99627.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",
