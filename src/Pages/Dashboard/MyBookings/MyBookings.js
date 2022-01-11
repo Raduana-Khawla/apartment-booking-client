@@ -9,7 +9,7 @@ const MyBookings = () => {
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    fetch("http://localhost:8000/allOrders")
+    fetch("https://afternoon-wave-99627.herokuapp.com//allOrders")
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [control]);
@@ -21,16 +21,19 @@ const MyBookings = () => {
 
   const onSubmit = (data) => {
     console.log(data, orderId);
-    fetch(`http://localhost:8000/statusUpdate/${orderId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://afternoon-wave-99627.herokuapp.com//statusUpdate/${orderId}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((result) => console.log(result));
   };
   const handleDelete = (id) => {
-    fetch(`http://localhost:8000/deleteOrder/${id}`, {
+    fetch(`https://afternoon-wave-99627.herokuapp.com//deleteOrder/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
