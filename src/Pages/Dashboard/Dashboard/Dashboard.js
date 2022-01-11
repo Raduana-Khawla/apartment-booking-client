@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import "./Dashboard.css";
 import Review from "../../Review/Review";
 import MyBookings from "../../Dashboard/MyBookings/MyBookings";
 import MakeAdmin from "../../Dashboard/MakeAdmin/MakeAdmin";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../Hooks/useAuth";
 import ManageOrder from "../ManageOrder/ManageOrder";
 import AddServices from "../../AddServices/AddServices";
 import BookProperty from "../BookProperty/BookProperty";
@@ -13,29 +13,7 @@ import ManageProducts from "./ManageProducts/ManageProducts";
 
 const Dashbaord = () => {
   let { path, url } = useRouteMatch();
-  const { user } = useAuth();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isUser, setIsUser] = useState(false);
-
-  useEffect(() => {
-    fetch(`http://localhost:8000/checkAdmin/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data[0]?.role === "admin") {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
-        if (data[0]) {
-          setIsUser(true);
-          setIsAdmin(true);
-        } else {
-          setIsUser(false);
-          setIsAdmin(true);
-        }
-      });
-  }, [user?.email]);
-  console.log(isAdmin);
+  const { admin } = useAuth();
   return (
     <div>
       <div className="dashboard-container">
@@ -59,7 +37,7 @@ const Dashbaord = () => {
               <Link to={`${url}/review`}>
                 <li className="dashboard-menu mt-5">Review</li>
               </Link>
-              {isAdmin && (
+              {admin && (
                 <div className="admin-dashboard">
                   <li className="dashboard-menu mt-5">Orders list Admin</li>
 

@@ -4,13 +4,10 @@ import { useForm } from "react-hook-form";
 
 const MyBookings = () => {
   const [orders, setOrders] = useState([]);
-  const [status, setStatus] = useState("");
   const [orderId, setOrderId] = useState("");
   const [control, setControl] = useState(false);
-
   const { register, handleSubmit } = useForm();
 
-  console.log(status);
   useEffect(() => {
     fetch("http://localhost:8000/allOrders")
       .then((res) => res.json())
@@ -20,7 +17,6 @@ const MyBookings = () => {
   // const status = "apporved";
   const handleOrderId = (id) => {
     setOrderId(id);
-    console.log(id);
   };
 
   const onSubmit = (data) => {
@@ -43,7 +39,6 @@ const MyBookings = () => {
           setControl(!control);
         }
       });
-    console.log(id);
   };
   return (
     <div className="container">

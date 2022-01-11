@@ -1,14 +1,12 @@
 import React from "react";
 import "./Menubar.css";
-import { Link } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { HashLink } from "react-router-hash-link";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../Hooks/useAuth";
 import logo from "../../../images/logo-removebg-preview.png";
 
 const Menubar = () => {
   const { user, logout } = useAuth();
-  console.log(user);
 
   return (
     <div>
@@ -59,7 +57,7 @@ const Menubar = () => {
                 Logout
               </button>
             ) : (
-              <Nav.Link as={Link} to="/login">
+              <Nav.Link as={HashLink} to="/login">
                 <span id="color">Login</span>
               </Nav.Link>
             )}

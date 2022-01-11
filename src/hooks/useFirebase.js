@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  getIdToken,
   updateProfile,
   signOut,
 } from "firebase/auth";
@@ -18,19 +19,22 @@ const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [authError, setAuthError] = useState("");
+  const [admin, setAdmin] = useState(false);
+  const [token, setToken] = useState("");
 
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
-  const registerUser = (email, password, name, history) => {
+  const registerUser = (email, password, name, username, history) => {
     setIsLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        console.log(result.user);
-        hanldeUserInfo(result.user.email);
+    createUserWithEmailAndPassword(auth, email, password, username)
+      .then((userCredential) => {
         setAuthError("");
-        const newUser = { email, displayName: name };
+        const newUser = { email, displayName: name, username: username };
         setUser(newUser);
+        // save user to the database
+        saveUser(email, name, username, "POST");
+        // send name to firebase after creation
         updateProfile(auth.currentUser, {
           displayName: name,
         })
@@ -40,28 +44,16 @@ const useFirebase = () => {
       })
       .catch((error) => {
         setAuthError(error.message);
-        console.log(error);
       })
       .finally(() => setIsLoading(false));
-  };
-  const hanldeUserInfo = (email) => {
-    fetch("http://localhost:8000/addUserInfo", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email }),
-    })
-      .then((res) => res.json())
-      .then((result) => console.log(result));
   };
 
   const loginUser = (email, password, location, history) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        console.log(result.user);
-        hanldeUserInfo(result.user.email);
+      .then((userCredential) => {
         const destination = location?.state?.from || "/";
-        history.replace(destination);
+        history.push(destination);
         setAuthError("");
       })
       .catch((error) => {
@@ -74,15 +66,16 @@ const useFirebase = () => {
     setIsLoading(true);
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        // const user = result.user;
+        const user = result.user;
+        saveUser(user.email, user.displayName, user.displayName, "PUT");
         setAuthError("");
         const destination = location?.state?.from || "/";
-        history.replace(destination);
+        history.push(destination);
       })
+      .finally(() => setIsLoading(false))
       .catch((error) => {
         setAuthError(error.message);
-      })
-      .finally(() => setIsLoading(false));
+      });
   };
 
   // observer user state
@@ -90,6 +83,9 @@ const useFirebase = () => {
     const unsubscribed = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        getIdToken(user).then((idToken) => {
+          setToken(idToken);
+        });
       } else {
         setUser({});
       }
@@ -97,6 +93,23 @@ const useFirebase = () => {
     });
     return () => unsubscribed;
   }, [auth]);
+
+  useEffect(() => {
+    let isUnmount = false;
+    setIsLoading(true);
+    fetch(`http://localhost:8000/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isUnmount) {
+          setAdmin(data.admin);
+          setIsLoading(false);
+        }
+      });
+    return () => {
+      isUnmount = true;
+    };
+  }, [user.email]);
+
   const logout = () => {
     setIsLoading(true);
     signOut(auth)
@@ -109,8 +122,21 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
+  const saveUser = (email, displayName, username, method) => {
+    const user = { email, displayName, username };
+    fetch("http://localhost:8000/users", {
+      method: method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then();
+  };
+
   return {
     user,
+    admin,
+    token,
     isLoading,
     authError,
     registerUser,
